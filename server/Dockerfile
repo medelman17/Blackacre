@@ -76,4 +76,4 @@ RUN cp /build/main .
 
 EXPOSE 8080
 
-CMD ["/dist/main", "--server","127.0.0.1:9999"]
+CMD ["/dist/main", "--server","blackacre:9999"]
