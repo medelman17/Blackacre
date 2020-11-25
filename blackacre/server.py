@@ -1,5 +1,5 @@
 import logging
-import blackacre.bootstrap as bootstrap
+from blackacre.bootstrap import arg_parser,servicer,logger,rules,server
 
 from blackacre_pb2 import BlackacreSentenceSegmenterResponse, BlackacreHealthCheckResponse
 from blackacre_pb2_grpc import BlackacreServicer, add_BlackacreServicer_to_server
@@ -26,12 +26,12 @@ class BlackacreServer(BlackacreServicer):
 
 
 if __name__ == '__main__':
-    bootstrap.logger()
-    args = bootstrap.arg_parser()
-    rules = bootstrap.rules(args)
-    server = bootstrap.server(args)
+    logger()
+    args = arg_parser()
+    rules = rules(args)
+    server = server(args)
 
-    bootstrap.servicer(server, BlackacreServer, {"rules": rules})
+    servicer(server, BlackacreServer, {"rules": rules})
 
     server.start()
 
