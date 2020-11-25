@@ -1,0 +1,99 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample Blackacre server",
+        "title": "Blackacre NLP",
+        "contact": {
+            "name": "Michael Edelman",
+            "url": "https://twitter.com/edelman215",
+            "email": "michael@fabulas.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "0.0.1"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/health/api": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Check health of API layer",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/health/server": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Check health of Server layer",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.BlackacreServerError"
+                        }
+                    }
+                }
+            }
+        },
+        "/sentence/segment": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Segment text into constituent sentences...",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.SentenceSegmenterRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.BlackacreServerError": {
+            "type": "object"
+        },
+        "api.SentenceSegmenterRequestBody": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

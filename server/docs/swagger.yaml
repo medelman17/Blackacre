@@ -1,0 +1,64 @@
+basePath: /
+definitions:
+  api.BlackacreServerError:
+    type: object
+  api.SentenceSegmenterRequestBody:
+    properties:
+      text:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: michael@fabulas.io
+    name: Michael Edelman
+    url: https://twitter.com/edelman215
+  description: This is a sample Blackacre server
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Blackacre NLP
+  version: 0.0.1
+paths:
+  /health/api:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Check health of API layer
+  /health/server:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.BlackacreServerError'
+      summary: Check health of Server layer
+  /sentence/segment:
+    post:
+      parameters:
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.SentenceSegmenterRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Segment text into constituent sentences...
+swagger: "2.0"

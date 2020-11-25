@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+
+option go_package = "github.com/medelman17/blackacre/server/pb";
+
+message BlackacreSentenceSegmenterRequest {
+  string text = 1;
+}
+
+message BlackacreSentenceSegmenterResponse {
+  repeated string sentences = 1;
+}
+
+message BlackacreHealthCheckResponse {
+  string status = 1;
+}
+
+message BlackacreHealthCheckRequest {
+
+}
+
+service Blackacre {
+  rpc GetSentences(BlackacreSentenceSegmenterRequest) returns (BlackacreSentenceSegmenterResponse) {}
+  rpc HealthCheck(BlackacreHealthCheckRequest) returns (BlackacreHealthCheckResponse) {}
+}
